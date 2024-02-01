@@ -1,0 +1,22 @@
+.qualcol{
+    background-color: #DB0B09;
+    color: #fff;
+    line-height: 20px;
+}
+.sectionbg{
+    width: 100vw;
+    background-color:#ddff44;
+}
+
+.bgImg img{
+    object-fit: cover !important;
+    width: 100%;
+    height: auto;
+}
+.qualServ{
+    display: flex;
+    flex-grow: 1;
+}
+.bgImage{
+ background-image: url('/assets/img1/mechanical.png');
+}
