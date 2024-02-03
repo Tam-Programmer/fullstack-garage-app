@@ -6,6 +6,7 @@ import Contact from './Pages/Contact/Contact';
 import Team from './Pages/Team/Team';
 import SignUp from  './Pages/SignUp/SignUp';
 import './Header.css'
+import { Link } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'bootstrap/dist/js/bootstrap.min.js';
 function Header() {
@@ -42,7 +43,7 @@ function Header() {
             </ul>
           </li> */}
           <li><a className="nav-link  text-dark" href="#contact">Contact</a></li>
-          <li><a className="getstarted  text-dark" href="#about">Sign Up</a></li>
+          <li><Link className="getstarted  text-dark" to="/register">SignUp </Link></li>
         </ul>
         <i className="bi bi-list mobile-nav-toggle" />
       </nav>{/* .navbar */}
