@@ -1,44 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
-    // const [values, setValues] = useState({
-    //   name: "",
-    //   email: "",
-    //   password: "",
-    // });
-    // const navigate = useNavigate();
-  
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   axios
-    //     .post("http://localhost:3000/register", values)
-    //     .then((res) => {
-    //       if (res.data.Status === "Success") {
-    //         navigate("/login");
-    //       } else {
-    //         alert("error");
-    //       }
-    //     })
-    //     .catch((err) => console.log(err));
-    // };
+  const [values, setValues] = useState({
+    firstname: "",
+    lastname: "",
+    phone: "",
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3000/register", values)
+      .then((res) => {
+        // console.log(res.data); // Log the response data to see the server's response
+        if (res.data.status === "Success") {
+          // console.log("Redirecting to login..."); // Log a message to check if the redirection is triggered
+          navigate("/login");
+        } else {
+          console.log("Registration error:", res.data.error);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="d-flex justify-content-center mt-5 container-fluid align-items-center bg-secondary vh-100">
       <div className="bg-white p-3 rounded w-auto">
         <h2>Sign Up</h2>
-        <form >
+        <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="name">
-              <strong>Name:</strong>
+            <label htmlFor="fname">
+              <strong>First Name:</strong>
             </label>
             <input
-              // onChange={(e) => setValues({ ...values, name: e.target.value })}
+              onChange={(e) =>
+                setValues({ ...values, firstname: e.target.value })
+              }
               type="text"
-              name="name"
+              name="fname"
               autoComplete="off"
-              placeholder="enter name"
+              placeholder="enter first name"
+              className="form-control rounded-0"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="lname">
+              <strong>Last Name:</strong>
+            </label>
+            <input
+              onChange={(e) =>
+                setValues({ ...values, lastname: e.target.value })
+              }
+              type="text"
+              name="lname"
+              autoComplete="off"
+              placeholder="enter last name"
+              className="form-control rounded-0"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="phone">
+              <strong>Phone:</strong>
+            </label>
+            <input
+              onChange={(e) => setValues({ ...values, phone: e.target.value })}
+              type="phone"
+              name="phone"
+              autoComplete="off"
+              placeholder="enter phone number"
               className="form-control rounded-0"
             />
           </div>
@@ -47,11 +81,11 @@ function SignUp() {
               <strong>Email:</strong>
             </label>
             <input
-              // onChange={(e) => setValues({ ...values, email: e.target.value })}
+              onChange={(e) => setValues({ ...values, email: e.target.value })}
               type="email"
               name="email"
               autoComplete="off"
-              placeholder="enter email"
+              placeholder="enter email here"
               className="form-control rounded-0"
             />
           </div>
@@ -60,9 +94,9 @@ function SignUp() {
               <strong>Password:</strong>
             </label>
             <input
-              // onChange={(e) =>
-              //   setValues({ ...values, password: e.target.value })
-              // }
+              onChange={(e) =>
+                setValues({ ...values, password: e.target.value })
+              }
               type="password"
               name="password"
               placeholder="enter password"
@@ -84,7 +118,9 @@ function SignUp() {
             </label>
           </div>
         </form>
-        <p>Already Have an Account? <Link to="/login">Login Here</Link></p>
+        <p>
+           Already Have an Account? <Link to="/login">Login Here</Link>
+        </p>
 
         {/* <Link
           to="/login"
