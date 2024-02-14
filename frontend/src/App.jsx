@@ -17,6 +17,7 @@ import AddCustomer from "./Components/Admin/AddCustomer";
 import Orders from "./Components/Admin/Orders";
 import AddOrder from "./Components/Admin/AddOrder";
 import AddService from "./Components/Admin/AddService";
+import PrivateRoute from "./Components/Admin/PrivateRoute";
 
 function App() {
   return (
@@ -32,15 +33,17 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<Contact />} /> {/* Fix the path for the Contact component */}
-          <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="/dashboard/customer" element={<Customer />}></Route>
-            <Route path="/dashboard/employee" element={<Employee />}></Route>
-            <Route path="/dashboard/add_employee" element={<AddEmployee />}></Route>
-            <Route path="/dashboard/orders" element={<Orders />}></Route>
-            <Route path="/dashboard/add_customer" element={<AddCustomer />}></Route>
-            <Route path="/dashboard/add_order" element={<AddOrder />}></Route>
-            <Route path="/dashboard/services" element={<Services />}></Route>
-            <Route path="/dashboard/add_service" element={<AddService />}></Route>
+          <Route path="/dashboard" element={<PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>}>
+                <Route path="/dashboard/customer" element={<Customer />}></Route>
+                <Route path="/dashboard/employee" element={<Employee />}></Route>
+                <Route path="/dashboard/add_employee" element={<AddEmployee />}></Route>
+                <Route path="/dashboard/orders" element={<Orders />}></Route>
+                <Route path="/dashboard/add_customer" element={<AddCustomer />}></Route>
+                <Route path="/dashboard/add_order" element={<AddOrder />}></Route>
+                <Route path="/dashboard/services" element={<Services />}></Route>
+                <Route path="/dashboard/add_service" element={<AddService />}></Route>
           </Route>
         </Routes>
         <Footer />

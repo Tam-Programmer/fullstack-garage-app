@@ -21,7 +21,7 @@ function Login() {
           if (res.data.role === "admin") {
             navigate("/dashboard"); // Redirect to the admin dashboard
           } else if (res.data.role === "employee") {
-            navigate("/dashboard/employee"); // Redirect to the employee dashboard
+            navigate("/contact"); // Redirect to the employee dashboard
           } else {
             navigate("/dashboard/customer"); // Redirect to the default dashboard
           }
