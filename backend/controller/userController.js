@@ -9,7 +9,7 @@ async function verifyUser(req, res, next) {
   }
 
   try {
-    const decoded = await jwt.verify(token, "jwt-secret-key");
+    const decoded = await jwt.verify(token, "jwt_secret_key");
     req.role = decoded.role;
     req.email = decoded.email;
     next();

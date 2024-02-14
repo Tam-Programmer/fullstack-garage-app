@@ -13,7 +13,7 @@ const PrivateRoute = ({ children }) => {
     }
   }, [navigate]);
 
-  return localStorage.getItem('LoggedIn') && localStorage.getItem('role') === 'admin' ? children : null;
+  return localStorage.getItem('LoggedIn') && localStorage.getItem('Role') === 'admin' ? children : null;
 };
 
 export default PrivateRoute;

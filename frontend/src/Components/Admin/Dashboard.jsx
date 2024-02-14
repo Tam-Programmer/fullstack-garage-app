@@ -7,12 +7,17 @@ function Dashboard() {
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
   const handleLogout = () => {
-    axios.get("http://localhost:3000/logout").then((result) => {
-      if (result.data.Status) {
-        localStorage.removeItem("LoggedIn");
-        navigate("/");
-      }
-    });
+    axios.get("http://localhost:3000/logout")
+      .then((result) => {
+        if (result.data.Status) {
+          localStorage.removeItem("LoggedIn");
+          localStorage.removeItem("Role"); // Clear the role from localStorage
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="container-fluid dash1">
