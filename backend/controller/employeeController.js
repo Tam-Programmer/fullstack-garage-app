@@ -85,33 +85,70 @@ async function employeeLogin(req, res) {
     return res.json({ error: "Error in login" });
   }
 }
-// async function employeeLogin(req, res) {
-//   try {
-//     const sql = "SELECT * FROM login WHERE email = ?";
-//     const [data] = await dbConnection.query(sql, [req.body.email]);
 
-//     if (data.length === 0) {
-//       return res.json({ error: "No such email exists" });
-//     }
+async function employeeList(req, res) {
+  try {
+    const employeeSql = "SELECT * FROM employees";
+    const result = await dbConnection.query(employeeSql);
+    return res.json({ Status: true, Result: result[0] });
+  } catch (err) {
+    return res.json({ Status: false, Error: "Query Error" });
+  }
+}
 
-//     const response = await bcrypt.compare(req.body.password, data[0].password);
+async function getEmployee(req, res) {
+  try {
+    const id = req.params.id;
+    const sql = "SELECT * FROM employees WHERE emp_id = ?";
+    const result = await dbConnection.query(sql, [id]);
 
-//     if (response) {
-//       const { role, email } = data[0];
+    if (result.length === 0) {
+      return res.json({
+        Status: false,
+        Error: "Employee not found",
+      });
+    }
 
-//       const token = jwt.sign({ role, email }, "jwt_secret_key", {
-//         expiresIn: "1d",
-//       });
+    const employee = result[0]; // Assuming only one employee is expected
 
-//       res.cookie("token", token);
-//       return res.json({ status: "Success" });
-//     } else {
-//       return res.json({ error: "Password not matched" });
-//     }
-//   } catch (err) {
-//     console.error("Error in login:", err);
-//     return res.json({ error: "Error in login" });
-//   }
-// }
+    return res.json({ Status: true, Result: employee });
+  } catch (error) {
+    console.log(error);
+    return res.json({ Status: false, Error: "Query Error" });
+  }
+}
 
-export { employeeRegister, employeeLogin, verifyUser };
+async function editEmployee(req, res) {
+  try {
+    const id = req.params.id;
+    const sql = `UPDATE employees 
+      SET firstname = ?, lastname = ?, email = ?, phone = ?, salary = ?, address = ?, role = ? 
+      WHERE emp_id = ?`;
+    const values = [
+      req.body.fname,
+      req.body.lname,
+      req.body.email,
+      req.body.phone,
+      req.body.salary,
+      req.body.address,
+      req.body.role,
+      id
+    ];
+
+    const result = await dbConnection.query(sql, values);
+
+    return res.json({ Status: true, Result: result });
+  } catch (error) {
+    console.log(error);
+    return res.json({ Status: false, Error: "Query Error" });
+  }
+}
+
+export {
+  employeeRegister,
+  employeeLogin,
+  verifyUser,
+  employeeList,
+  getEmployee,
+  editEmployee
+};

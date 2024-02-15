@@ -30,14 +30,14 @@ async function register(req, res) {
       phone,
       email,
       hashedPassword,
-      role,
+      role ?? 'customer',
     ];
     const customerSql =
       "INSERT INTO customers (`firstname`, `lastname`, `phone`, `email`, `password`, `role`) VALUES (?, ?, ?, ?, ?, ?)";
     await dbConnection.query(customerSql, customerValues);
     console.log("Data inserted into customers table");
 
-    const loginValues = [email, hashedPassword, role];
+    const loginValues = [email, hashedPassword, role ?? 'customer'];
     const loginSql =
       "INSERT INTO login (`email`, `password`, `role`, `cust_id`) VALUES (?, ?, ?, LAST_INSERT_ID())";
     await dbConnection.query(loginSql, loginValues);
@@ -86,6 +86,5 @@ async function login(req, res) {
     return res.json({ error: "Error in login" });
   }
 }
-
 
 export { register, login, verifyUser };
