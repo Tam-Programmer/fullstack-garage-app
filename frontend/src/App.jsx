@@ -36,12 +36,12 @@ function App() {
           <Route path="/contact" element={<Contact />} />{" "}
           {/* Fix the path for the Contact component */}
           <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
+            path="/dashboard" element={<Dashboard />}
+            // element={
+            //   <PrivateRoute>
+            //     <Dashboard />
+            //   </PrivateRoute>
+            // }
           >
             <Route path="/dashboard/customer" element={<Customer />}></Route>
             <Route path="/dashboard/employee" element={<Employee />}></Route>

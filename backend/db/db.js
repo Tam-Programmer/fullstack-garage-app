@@ -52,8 +52,8 @@ const createTables = async () => {
       cust_id INT,
       emp_id INT,
       PRIMARY KEY (login_id),
-      FOREIGN KEY (cust_id) REFERENCES customers(cust_id),
-      FOREIGN KEY (emp_id) REFERENCES employees(emp_id) 
+      FOREIGN KEY (cust_id) REFERENCES customers(cust_id) ON DELETE CASCADE,
+      FOREIGN KEY (emp_id) REFERENCES employees(emp_id) ON DELETE CASCADE
     )`;
 
     await dbConnection.promise().query(createCustomerTable);

@@ -1,5 +1,5 @@
 import express from "express";
-import { employeeLogin, employeeRegister, verifyUser, employeeList, getEmployee, editEmployee } from "../controller/employeeController.js";
+import { employeeLogin, employeeRegister, verifyUser, employeeList, getEmployee, editEmployee,deleteEmployee } from "../controller/employeeController.js";
 
 const router = express.Router();
 
@@ -13,6 +13,7 @@ router.post("/dashboard/login", employeeLogin);
 router.get("/dashboard/employee",employeeList);
 router.get("/dashboard/employee/:id",getEmployee);
 router.put("/dashboard/edit_employee/:id",editEmployee);
+router.delete("/dashboard/delete_employee/:id",deleteEmployee);
 
 router.get("/logout", (req, res) => {
   res.clearCookie("token");

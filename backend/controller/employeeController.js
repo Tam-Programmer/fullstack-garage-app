@@ -144,11 +144,29 @@ async function editEmployee(req, res) {
   }
 }
 
+async function deleteEmployee(req, res) {
+  try {
+    const id = req.params.id;
+    const sql = 'DELETE FROM employees WHERE emp_id = ?';
+    const result = await dbConnection.query(sql, [id]);
+
+    if (!result) {
+      return res.json({ Status: false, Error: 'Query Error' });
+    }
+
+    return res.json({ Status: true, Result: result });
+  } catch (error) {
+    console.log(error);
+    return res.json({ Status: false, Error: 'Query Error' });
+  }
+}
+
 export {
   employeeRegister,
   employeeLogin,
   verifyUser,
   employeeList,
   getEmployee,
-  editEmployee
+  editEmployee,
+  deleteEmployee
 };
