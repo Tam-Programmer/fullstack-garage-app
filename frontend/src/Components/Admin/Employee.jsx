@@ -80,13 +80,14 @@ const Employee = () => {
                       to={`/dashboard/edit_employee/${emp.emp_id}`}
                       className="btn btn-info btn-sm me-2"
                     >
-                      Edit
+                      <i className="bi bi-pencil-fill"> Edit</i>
                     </Link>
                     <button
                       className="btn btn-warning btn-sm"
                       onClick={() => handleDelete(emp.emp_id)}
                     >
-                      Delete
+                      <i className="bi bi-trash-fill"> Delete</i>
+                      
                     </button>
                   </td>
                 </tr>
