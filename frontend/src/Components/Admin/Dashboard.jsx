@@ -59,7 +59,7 @@ function Dashboard() {
                   to="/dashboard/add_employee"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-person ms-2"></i>
+                  <i className="fs-4 <i bi bi-person-plus-fill"></i>
                   <span className="ms-2 d-none d-sm-inline">Add Employee</span>
                 </Link>
               </li>
@@ -68,8 +68,8 @@ function Dashboard() {
                   to="/dashboard/customer"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-columns ms-2"></i>
-                  <span className="ms-2 d-none d-sm-inline">Customer</span>
+                  <i className="fs-4 <i bi bi-people-fill"></i>
+                  <span className="ms-2 d-none d-sm-inline">Customers</span>
                 </Link>
               </li>
               <li className="w-100">
@@ -77,7 +77,7 @@ function Dashboard() {
                   to="/dashboard/add_customer"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-person ms-2"></i>
+                  <i className="fs-4 <i bi bi-person-plus-fill"></i>
                   <span className="ms-2 d-none d-sm-inline">Add Customer</span>
                 </Link>
               </li>
@@ -86,7 +86,7 @@ function Dashboard() {
                   to="/dashboard/services"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-person ms-2"></i>
+                  <i className="fs-4 bi bi-tools"></i>
                   <span className="ms-2 d-none d-sm-inline">Services</span>
                 </Link>
               </li>
@@ -95,7 +95,7 @@ function Dashboard() {
                   to="/dashboard/add_services"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-person ms-2"></i>
+                  <i className="fs-4 bi bi-plus-circle-fill"></i>
                   <span className="ms-2 d-none d-sm-inline">Add Services</span>
                 </Link>
               </li>
@@ -104,8 +104,8 @@ function Dashboard() {
                   to="/dashboard/order"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-person ms-2"></i>
-                  <span className="ms-2 d-none d-sm-inline">Order</span>
+                  <i className="fs-4 bi bi-cart4"></i>
+                  <span className="ms-2 d-none d-sm-inline">Orders</span>
                 </Link>
               </li>
               <li className="w-100">
@@ -113,14 +113,14 @@ function Dashboard() {
                   to="/dashboard/add_order"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-person ms-2"></i>
+                  <i className="fs-4 bi bi-cart-plus-fill"></i>
                   <span className="ms-2 d-none d-sm-inline">Add Order</span>
                 </Link>
               </li>
 
               <li className="w-100" onClick={handleLogout}>
                 <Link to="/" className="nav-link px-0 align-middle text-white">
-                  <i className="fs-4 bi-power ms-2"></i>
+                  <i className="fs-4 bi bi-box-arrow-right"></i>
                   <span className="ms-2 d-none d-sm-inline">Logout</span>
                 </Link>
               </li>
