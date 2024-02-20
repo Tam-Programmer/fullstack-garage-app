@@ -56,6 +56,14 @@ const createTables = async () => {
       FOREIGN KEY (emp_id) REFERENCES employees(emp_id) ON DELETE CASCADE
     )`;
 
+    const createServiceTable = `CREATE TABLE IF NOT EXISTS services(
+      serv_id int auto_increment,
+      service_name varchar(255) not null,
+      description varchar(255) not null,
+      service_icon varchar(255) not null,
+      PRIMARY KEY (serv_id)
+    )`;
+
     await dbConnection.promise().query(createCustomerTable);
     console.log("Customer table created");
 
@@ -64,6 +72,11 @@ const createTables = async () => {
 
     await dbConnection.promise().query(createLoginTable);
     console.log("Login table created");
+
+    await dbConnection.promise().query(createServiceTable);
+    console.log("Service table created");
+
+
   } catch (err) {
     console.error("Error creating tables:", err);
   }

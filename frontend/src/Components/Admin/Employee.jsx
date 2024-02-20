@@ -4,16 +4,14 @@ import axios from "axios";
 
 const Employee = () => {
   const [employee, setEmployee] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [employeesPerPage] = useState(5); // Number of employees per page
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/dashboard/employee"
-        );
+        const response = await axios.get("http://localhost:3000/dashboard/employee");
         if (response.data.Status) {
-          // console.log(response.data);
-          // console.log(response.data.Result);
           setEmployee(response.data.Result);
         } else {
           alert(response.data.Error);
@@ -28,9 +26,7 @@ const Employee = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        "http://localhost:3000/dashboard/delete_employee/" + id
-      );
+      const response = await axios.delete("http://localhost:3000/dashboard/delete_employee/" + id);
       if (response.data.Status) {
         window.location.reload();
       } else {
@@ -38,6 +34,26 @@ const Employee = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // Get current employees for pagination
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = employee.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(employee.length / employeesPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -63,38 +79,52 @@ const Employee = () => {
               <th>Action</th>
             </tr>
           </thead>
-          {/* check if the employee state is not null before rendering the table rows */}
-          {employee && (
-            <tbody className="bg-success">
-              {employee.map((emp) => (
-                <tr key={emp.emp_id}>
-                  <td>{emp.firstname}</td>
-                  <td>{emp.lastname}</td>
-                  <td>{emp.email}</td>
-                  <td>{emp.phone}</td>
-                  <td>{emp.role}</td>
-                  <td>{emp.address}</td>
-                  <td>{emp.salary}</td>
-                  <td>
-                    <Link
-                      to={`/dashboard/edit_employee/${emp.emp_id}`}
-                      className="btn btn-info btn-sm me-2"
-                    >
-                      <i className="bi bi-pencil-fill"> Edit</i>
-                    </Link>
-                    <button
-                      className="btn btn-warning btn-sm"
-                      onClick={() => handleDelete(emp.emp_id)}
-                    >
-                      <i className="bi bi-trash-fill"> Delete</i>
-                      
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          )}
+          <tbody className="bg-success">
+            {currentEmployees.map((emp) => (
+              <tr key={emp.emp_id}>
+                <td>{emp.firstname}</td>
+                <td>{emp.lastname}</td>
+                <td>{emp.email}</td>
+                <td>{emp.phone}</td>
+                <td>{emp.role}</td>
+                <td>{emp.address}</td>
+                <td>{emp.salary}</td>
+                <td>
+                  <Link to={`/dashboard/edit_employee/${emp.emp_id}`} className="btn btn-info btn-sm me-2">
+                    <i className="bi bi-pencil-fill"> Edit</i>
+                  </Link>
+                  <button className="btn btn-warning btn-sm" onClick={() => handleDelete(emp.emp_id)}>
+                    <i className="bi bi-trash-fill"> Delete</i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
+        {/* Pagination */}
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+            <button className="page-link" onClick={prevPage}>
+              <span aria-hidden="true">&laquo;</span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+          </li>
+          {Array(Math.ceil(employee.length / employeesPerPage))
+            .fill()
+            .map((_, index) => (
+              <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
+                <button className="page-link" onClick={() => paginate(index + 1)}>
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+          <li className={`page-item ${currentPage === Math.ceil(employee.length / employeesPerPage) ? "disabled" : ""}`}>
+            <button className="page-link" onClick={nextPage}>
+              <span aria-hidden="true">&raquo;</span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   );

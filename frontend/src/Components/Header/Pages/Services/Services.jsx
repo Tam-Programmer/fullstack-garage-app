@@ -1,82 +1,72 @@
-import React from 'react'
-import './Services.css'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "../../../Admin/Styles.css";
 
-function Services() {
+const Services = () => {
+  const [service, setService] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/dashboard/service"
+        );
+        if (response.data.Status) {
+          setService(response.data.Result);
+        } else {
+          alert(response.data.Error);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-   <div>
-  {/* ======= Services Section ======= */}
-  <section id="services" className="services section-bg">
-    <div className="container" data-aos="fade-up">
-      {/* <div className="section-title">
-        <h2>Services</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div> */}
-      <h2 className='hdrsrvc'>Services <div className="hr-line3"></div></h2>
-      <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+    <div className="px-5 mt-3">
+      <div className="d-flex justify-content-center">
+        <h2>Services </h2>
+      </div>
+      <div className="mt-3">
+        <table className="table">
+          <tbody>
+            <div className="d-flex">
 
-      <div className="row d-flex justify-content-center align-items-center">
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch pt-4" data-aos="zoom-in" data-aos-delay={100}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bxl-dribbble" /></div>
-            <h4><a href>Lorem Ipsum</a></h4>
-            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-          </div>
-        </div>
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 pt-4 mt-md-0" data-aos="zoom-in" data-aos-delay={200}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bx-file" /></div>
-            <h4><a href>Sed ut perspici</a></h4>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-          </div>
-        </div>
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 pt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay={300}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bx-tachometer" /></div>
-            <h4><a href>Magni Dolores</a></h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-          </div>
-        </div>
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 pt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay={400}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bx-layer" /></div>
-            <h4><a href>Nemo Enim</a></h4>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 pt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay={400}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bx-layer" /></div>
-            <h4><a href>Nemo Enim</a></h4>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 pt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay={300}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bx-tachometer" /></div>
-            <h4><a href>Magni Dolores</a></h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-          </div>
-        </div>
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 pt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay={400}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bx-layer" /></div>
-            <h4><a href>Nemo Enim</a></h4>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
-        <div className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 pt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay={400}>
-          <div className="icon-box">
-            <div className="icon"><i className="bx bx-layer" /></div>
-            <h4><a href>Nemo Enim</a></h4>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
+              
+              {service.map((serv) => (
+                <tr key={serv.serv_id}>
+                  <div>
+                  <p>Services & Repairs</p>
+                    <td>
+                      <h4>{serv.service_name}</h4>
+                    </td>
+                  </div>
+
+                  <div className="d-flex">
+                    <td>
+                      <Link
+                        to={`/dashboard/edit_service/${serv.serv_id}`}
+                      >
+                        <p> Read More +</p>
+                      </Link>
+                    </td>
+                    <td>
+                   <img src={`http://localhost:3000/Images/` + serv.service_icon}
+                      alt="Service Icon"
+                      style={{ width: "50px", height: "50px" }} />
+                    </td>
+                  </div>
+                </tr>
+              ))}
+            </div>
+          </tbody>
+        </table>
       </div>
     </div>
-  </section>{/* End Services Section */}
-</div>
+  );
+};
 
-  )
-}
-
-export default Services
+export default Services;

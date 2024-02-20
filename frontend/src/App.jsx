@@ -17,6 +17,7 @@ import Customer from "./Components/Admin/Customer";
 import AddCustomer from "./Components/Admin/AddCustomer";
 import Orders from "./Components/Admin/Orders";
 import AddOrder from "./Components/Admin/AddOrder";
+import Service from "./Components/Admin/Service";
 import AddService from "./Components/Admin/AddService";
 import PrivateRoute from "./Components/Admin/PrivateRoute";
 
@@ -59,7 +60,7 @@ function App() {
               element={<AddCustomer />}
             ></Route>
             <Route path="/dashboard/add_order" element={<AddOrder />}></Route>
-            <Route path="/dashboard/services" element={<Services />}></Route>
+            <Route path="/dashboard/service" element={<Service />}></Route>
             <Route
               path="/dashboard/add_service"
               element={<AddService />}

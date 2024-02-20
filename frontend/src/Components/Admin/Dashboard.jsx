@@ -29,7 +29,7 @@ function Dashboard() {
               className="d-flex align-items-center pb-3 mb-md-1 mt-md-3 me-md-auto text-white text-decoration-none"
             >
               <span className="fs-5 fw-bolder d-none d-sm-inline">
-                Abe Garage
+                Admin Menu
               </span>
             </Link>
             <ul
@@ -50,7 +50,7 @@ function Dashboard() {
                   to="/dashboard/employee"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 bi-people ms-2"></i>
+                  <i className="fs-4 bi-people"></i>
                   <span className="ms-2 d-none d-sm-inline">Employees</span>
                 </Link>
               </li>
@@ -59,16 +59,17 @@ function Dashboard() {
                   to="/dashboard/add_employee"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 <i bi bi-person-plus-fill"></i>
+                  <i className="fs-4 bi-person"></i>
                   <span className="ms-2 d-none d-sm-inline">Add Employee</span>
                 </Link>
               </li>
+              
               <li className="w-100">
                 <Link
                   to="/dashboard/customer"
                   className="nav-link px-0 align-middle text-white"
                 >
-                  <i className="fs-4 <i bi bi-people-fill"></i>
+                  <i className="fs-4 bi bi-people-fill"></i>
                   <span className="ms-2 d-none d-sm-inline">Customers</span>
                 </Link>
               </li>
@@ -83,7 +84,7 @@ function Dashboard() {
               </li>
               <li className="w-100">
                 <Link
-                  to="/dashboard/services"
+                  to="/dashboard/service"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="fs-4 bi bi-tools"></i>
@@ -92,11 +93,11 @@ function Dashboard() {
               </li>
               <li className="w-100">
                 <Link
-                  to="/dashboard/add_services"
+                  to="/dashboard/add_service"
                   className="nav-link px-0 align-middle text-white"
                 >
                   <i className="fs-4 bi bi-plus-circle-fill"></i>
-                  <span className="ms-2 d-none d-sm-inline">Add Services</span>
+                  <span className="ms-2 d-none d-sm-inline">Add Service</span>
                 </Link>
               </li>
               <li className="w-100">

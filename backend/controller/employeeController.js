@@ -161,6 +161,37 @@ async function deleteEmployee(req, res) {
   }
 }
 
+async function addService(req, res) {
+  try {
+    const { service_name, description } = req.body;
+    const service_icon = req.file.filename;
+
+    const sqlService = 'INSERT INTO services (`service_name`, `description`, `service_icon`) VALUES (?, ?, ?)';
+    const values = [service_name, description, service_icon];
+
+    const result = await dbConnection.query(sqlService, values);
+
+    if (!result) {
+      return res.json({ Status: false, Error: 'Insert service query error' });
+    }
+
+    return res.json({ Status: true, Result: result });
+  } catch (error) {
+    console.log(error);
+    return res.json({ Status: false, Error: 'Query Error' });
+  }
+}
+
+async function serviceList(req, res) {
+  try {
+    const serviceSql = "SELECT * FROM services";
+    const result = await dbConnection.query(serviceSql);
+    return res.json({ Status: true, Result: result[0] });
+  } catch (err) {
+    return res.json({ Status: false, Error: "Query Error" });
+  }
+}
+  
 export {
   employeeRegister,
   employeeLogin,
@@ -168,5 +199,8 @@ export {
   employeeList,
   getEmployee,
   editEmployee,
-  deleteEmployee
+  deleteEmployee,
+  addService,
+  serviceList,
+  
 };

@@ -15,6 +15,7 @@ app.use(
 );
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.static("Public"));
 
 app.use("/", userRoute);
 app.use("/",employeeRoute);
