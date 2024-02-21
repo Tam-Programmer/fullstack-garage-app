@@ -45,7 +45,7 @@ const Services = () => {
                 <p>Services & Repairs</p>
                 <h3 className="card-title">{serv.service_name}</h3>
                 <div className="card-content">
-                  <div className="d-flex gap-4">
+                  <div className="d-flex gap-4 justify-content-between">
                     <div className="card-link-wrapper">
                       <Link
                         to={`/dashboard/edit_service/${serv.serv_id}`}
@@ -61,15 +61,18 @@ const Services = () => {
                         }
                         alt="Service Icon"
                         style={{
-                          width: "75px",
-                          height: "60px",
+                          width: "60px",
+                          height: "30px",
                           paddingLeft: "10px",
-                          borderRadius: "50%",
+                          borderTopLeftRadius:"5px",
+                          borderBottomRightRadius:"5px"
+                          
                         }}
                       />
                     </div>
                   </div>
                 </div>
+                <div className="bold-line"></div>
               </div>
             </li>
           ))}

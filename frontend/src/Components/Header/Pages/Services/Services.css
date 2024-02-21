@@ -237,7 +237,10 @@ h2 {
       grid-column-gap: 40px;
   }
 }
-
+.bold-line{
+  border: 2px solid #dd7d25;
+  width: 200px;
+}
 
 .hr-line3 {
     width: 40px;
