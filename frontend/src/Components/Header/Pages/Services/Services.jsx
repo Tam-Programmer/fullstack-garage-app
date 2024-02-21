@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../../Admin/Styles.css";
+import "./Services.css";
 
 const Services = () => {
   const [service, setService] = useState([]);
@@ -27,43 +28,52 @@ const Services = () => {
 
   return (
     <div className="px-5 mt-3">
-      <div className="d-flex justify-content-center">
-        <h2>Services </h2>
-      </div>
-      <div className="mt-3">
-        <table className="table">
-          <tbody>
-            <div className="d-flex">
-
-              
-              {service.map((serv) => (
-                <tr key={serv.serv_id}>
-                  <div>
-                  <p>Services & Repairs</p>
-                    <td>
-                      <h4>{serv.service_name}</h4>
-                    </td>
-                  </div>
-
-                  <div className="d-flex">
-                    <td>
+      <div className="container">
+        <br />
+        <br />
+        <h2>Our Services</h2>
+        <p>
+          Bring to the table win-win survival to ensure proactive dominations.
+          At the end of the day, going forward, a new normal that has evolved
+          from generation X is on the runway heading towards a streamlined cloud
+          solutions.
+        </p>
+        <ul className="cards">
+          {service.map((serv) => (
+            <li key={serv.serv_id} className="card">
+              <div>
+                <p>Services & Repairs</p>
+                <h3 className="card-title">{serv.service_name}</h3>
+                <div className="card-content">
+                  <div className="d-flex gap-4">
+                    <div className="card-link-wrapper">
                       <Link
                         to={`/dashboard/edit_service/${serv.serv_id}`}
+                        className="card-link"
                       >
-                        <p> Read More +</p>
+                        Read More +
                       </Link>
-                    </td>
-                    <td>
-                   <img src={`http://localhost:3000/Images/` + serv.service_icon}
-                      alt="Service Icon"
-                      style={{ width: "50px", height: "50px" }} />
-                    </td>
+                    </div>
+                    <div>
+                      <img
+                        src={
+                          `http://localhost:3000/Images/` + serv.service_icon
+                        }
+                        alt="Service Icon"
+                        style={{
+                          width: "75px",
+                          height: "60px",
+                          paddingLeft: "10px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </div>
                   </div>
-                </tr>
-              ))}
-            </div>
-          </tbody>
-        </table>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
